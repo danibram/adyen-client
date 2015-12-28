@@ -6,7 +6,7 @@ Adyen raw client for basic integrations.
 
 ##Getting started
 
-Install the module with: `npm install adyen-client-raw`
+Install the module with: `npm install adyen-raw-client`
 
 ## Documentation
 
