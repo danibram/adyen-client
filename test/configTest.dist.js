@@ -1,5 +1,5 @@
 module.exports = {
     merchantAccount: 'YOUR MERCHANT ACCOUNT'
-    username: 'YOUR USERNAM',
+    username: 'YOUR USERNAME',
     password: 'YOUR PASSWORD'
 }
