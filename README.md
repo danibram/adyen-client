@@ -32,9 +32,12 @@ aClient
 
 ## Documentation
 
+Now it has this methods: authorizePayment, getRecurringData, capture, cancelOrRefund
+
 ## Release History
 
-#### (1.0.5)
+#### (1.0.6)
+- Fix dependencies
 - Firsts step.
 - Added basic methods
 
