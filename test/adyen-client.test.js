@@ -1,8 +1,8 @@
 var util = require('util'),
-    client = require('../lib/index.js'),
+    client = require('../lib'),
     cfg = require('./configTest.js');
 
-var aClient = client(cfg);
+var aClient = client(cfg, true);
 
 aClient
     .authorizePayment({
@@ -22,9 +22,9 @@ aClient
     })
     .then(function (response) {
         console.log(util.inspect(response, false, 20, true));
-    })
-    .fail(function (error) {
+    }, function (error) {
         console.log(util.inspect(error, false, 20, true));
+
     });
 
 aClient
@@ -35,7 +35,12 @@ aClient
         }
     }).then(function (response) {
         console.log(util.inspect(response, false, 20, true));
-    })
-    .fail(function (error) {
+    }, function (error) {
         console.log(util.inspect(error, false, 20, true));
+    });
+
+
+aClient
+    .initCCForm().then(function (response) {
+        console.log(util.inspect(response, false, 20, true));
     });
