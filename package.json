@@ -1,6 +1,6 @@
 {
   "name": "adyen-client",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "Adyen client for node.js integrations.",
   "main": "./lib",
   "scripts": {
@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "axios": "^0.8.1",
+    "babel-polyfill": "^6.3.14",
     "moment": "^2.11.0"
   }
 }

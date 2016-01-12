@@ -175,7 +175,8 @@ Run ```npm build``` to build the module.
 
 ## Release History
 
-#### (2.0.0)
+#### (2.0.2)
+- Fix issues
 - Internal refractor (ES6)
 - Docs Changed
 - Responses now returns the RAW request, and response
