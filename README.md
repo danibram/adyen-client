@@ -2,7 +2,7 @@
 
 [![Dependency Status](https://david-dm.org/danibram/adyen-client.svg)](https://david-dm.org/danibram/adyen-client)
 
-Adyen client for basic integrations.
+Adyen client
 
 
 ## Getting started
@@ -16,7 +16,7 @@ var aClient = adyenClient({
     merchantAccount: 'YOUR MERCHANT ACCOUNT'
     username: 'YOUR USERNAME',
     password: 'YOUR PASSWORD'
-});
+}, true);
 aClient
     .getRecurringData({
         "shopperReference": "SimonHopper1",
@@ -33,15 +33,22 @@ aClient
 
 ## Documentation
 
-First of all you need to initialize the client passing your merchant account, username, password and front end key (only if you need to do the frontend initialization).
+First of all you need to initialize the client passing your merchant account, username, password and front end key (only if you need to do the frontend initialization), remember to add a second variable that indicates that you are in development.
+
 ```javascript
 var adyenClient = require('adyen-client')
-var aClient = adyenClient({
-    frontKey: 'YOUR FRONT END KEY', //Only used for the initCCForm
-    merchantAccount: 'YOUR MERCHANT ACCOUNT'
-    username: 'YOUR USERNAME',
-    password: 'YOUR PASSWORD'
-});
+
+/*
+    opts = {
+        frontKey: 'YOUR FRONT END KEY', //Only used for the initCCForm
+        merchantAccount: 'YOUR MERCHANT ACCOUNT'
+        username: 'YOUR USERNAME',
+        password: 'YOUR PASSWORD'
+    }
+
+    development = TRUE or FALSE //indicates that your are on development, for production is not neccesary
+*/
+var aClient = adyenClient(opts, development);
 ```
 Then you have the client initialized, now you have access to this methods, every method return a promise, and you need to follow the adyen documentation to know how pass the data:
 
@@ -149,7 +156,29 @@ Then you have the client initialized, now you have access to this methods, every
         })
     ```
 
+## Responses
+
+The initCCForm returns the data example and the others returns this:
+
+```javascript
+{
+    data: {},//The Response from Adyen
+    lastResponse: {}, //Axios RAW response
+    lastRequest: {} //Axios RAW request
+}
+```
+
+## Development
+
+Run ```npm install;npm run dev``` to watch the proyect, and compile the code automatically.
+Run ```npm build``` to build the module.
+
 ## Release History
+
+#### (2.0.0)
+- Internal refractor (ES6)
+- Docs Changed
+- Responses now returns the RAW request, and response
 
 #### (1.0.8)
 - Internal Refactor
