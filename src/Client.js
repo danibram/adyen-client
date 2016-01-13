@@ -41,8 +41,9 @@ export default class Client {
         }
     }
 
-    composeOutput (data) {
+    composeOutput (data, success) {
         return {
+            success: success,
             data: data,
             lastResponse: this._lastResponse,
             lastRequest: this._lastRequest
@@ -59,13 +60,13 @@ export default class Client {
             axios(r)
                 .then((response) => {
                     this._lastResponse = response;
-                    return resolve(this.composeOutput(response.data));
+                    return resolve(this.composeOutput(response.data, true));
                 }, (response) => {
                     this._lastResponse = response;
-                    return resolve(this.composeOutput(response.data));
+                    return reject(this.composeOutput(response.data, false));
                 })
                 .catch((response) => {
-                    return reject(this.composeOutput(response.data));
+                    return reject(this.composeOutput(response.data, false));
                 });
         })
     };

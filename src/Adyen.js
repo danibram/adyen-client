@@ -74,21 +74,20 @@ export default class Adyen extends Client {
     authorizePayment (params) {
         return this._method(params, Specs.authorizePayment)
     }
-
     getRecurringData (params) {
-        return this._method(params, Specs.authorizePayment)
+        return this._method(params, Specs.getRecurringData)
     }
     disableRecurring (params) {
-        return this._method(params, Specs.authorizePayment)
+        return this._method(params, Specs.disableRecurring)
     }
     capture (params) {
-        return this._method(params, Specs.authorizePayment)
+        return this._method(params, Specs.capture)
     }
     refund (params) {
-        return this._method(params, Specs.authorizePayment)
+        return this._method(params, Specs.refund)
     }
     cancelOrRefund (params) {
-        return this._method(params, Specs.authorizePayment)
+        return this._method(params, Specs.cancelOrRefund)
     }
 
     _method (params, cfg) {

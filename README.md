@@ -162,7 +162,8 @@ Then you have the client initialized, now you have access to this methods, every
 The initCCForm returns the data example and the others returns this:
 
 ```javascript
-{
+{   
+    success: Boolean, //TRUE or FALSE
     data: {},//The Response from Adyen
     lastResponse: {}, //Axios RAW response
     lastRequest: {} //Axios RAW request
@@ -176,7 +177,8 @@ Run ```npm build``` to build the module.
 
 ## Release History
 
-#### (2.0.5)
+#### (2.0.6)
+- Added success field in response
 - Fix issues
 - Internal refractor (ES6)
 - Docs Changed
