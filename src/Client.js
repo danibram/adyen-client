@@ -51,10 +51,10 @@ export default class Client {
 
     makeRequest (params, path) {
         return new Promise((resolve, reject) => {
-            this._lastRequest = params;
-            this._lastResponse = null;
-
             var r = this.auth(this.createReq(params, path))
+
+            this._lastRequest = r;
+            this._lastResponse = null;
 
             axios(r)
                 .then((response) => {

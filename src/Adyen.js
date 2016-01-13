@@ -12,11 +12,11 @@ import moment from 'moment'
 const Config = {
     production: {
         endpoint: '',
-        environment: 'production'
+        production: true
     },
     development: {
         endpoint: 'https://pal-test.adyen.com/pal/servlet/',
-        environment: 'development'
+        development: true
     }
 }
 
@@ -55,10 +55,10 @@ const Specs = {
 
 export default class Adyen extends Client {
 
-    constructor (config, development) {
-        (development) ?
-        config = Object.assign(Config['development'], config)
-        : config = Object.assign(Config['production'], config)
+    constructor (config) {
+
+        let env = (config.development) ? 'development' : 'production'
+        config = Object.assign(Config[env], config)
 
         super(config)
         this.config = config

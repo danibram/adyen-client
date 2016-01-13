@@ -9,6 +9,6 @@
 import "babel-polyfill"
 import Adyen from './Adyen'
 
-module.exports = function createTrustlyClient (config, development) {
-    return new Adyen (config, development)
+module.exports = function createTrustlyClient (config) {
+    return new Adyen (config)
 };

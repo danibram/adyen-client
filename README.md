@@ -15,8 +15,9 @@ var aClient = adyenClient({
     frontKey: 'YOUR FRONT END KEY', //Only used for the initCCForm
     merchantAccount: 'YOUR MERCHANT ACCOUNT'
     username: 'YOUR USERNAME',
-    password: 'YOUR PASSWORD'
-}, true);
+    password: 'YOUR PASSWORD',
+    development: true
+});
 aClient
     .getRecurringData({
         "shopperReference": "SimonHopper1",
@@ -33,7 +34,7 @@ aClient
 
 ## Documentation
 
-First of all you need to initialize the client passing your merchant account, username, password and front end key (only if you need to do the frontend initialization), remember to add a second variable that indicates that you are in development.
+First of all you need to initialize the client passing your merchant account, username, password and front end key (only if you need to do the frontend initialization).
 
 ```javascript
 var adyenClient = require('adyen-client')
@@ -44,11 +45,11 @@ var adyenClient = require('adyen-client')
         merchantAccount: 'YOUR MERCHANT ACCOUNT'
         username: 'YOUR USERNAME',
         password: 'YOUR PASSWORD'
+        development: Boolean //TRUE or FALSE indicates that your are on development, for production is not neccesary
     }
 
-    development = TRUE or FALSE //indicates that your are on development, for production is not neccesary
 */
-var aClient = adyenClient(opts, development);
+var aClient = adyenClient(opts);
 ```
 Then you have the client initialized, now you have access to this methods, every method return a promise, and you need to follow the adyen documentation to know how pass the data:
 
@@ -175,7 +176,7 @@ Run ```npm build``` to build the module.
 
 ## Release History
 
-#### (2.0.2)
+#### (2.0.5)
 - Fix issues
 - Internal refractor (ES6)
 - Docs Changed

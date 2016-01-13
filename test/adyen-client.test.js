@@ -2,7 +2,7 @@ var util = require('util'),
     client = require('../lib'),
     cfg = require('./configTest.js');
 
-var aClient = client(cfg, true);
+var aClient = client(cfg);
 
 aClient
     .authorizePayment({
