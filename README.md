@@ -177,7 +177,8 @@ Run ```npm build``` to build the module.
 
 ## Release History
 
-#### (2.0.6)
+#### (2.0.7)
+- Update dependencies
 - Added success field in response
 - Fix issues
 - Internal refractor (ES6)
