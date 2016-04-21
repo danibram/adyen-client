@@ -179,7 +179,7 @@ Then you have the client initialized, now you have access to this methods, every
 The initCCForm returns the data example and the others returns this:
 
 ```javascript
-{   
+{
     success: Boolean, //TRUE or FALSE
     data: {},//The Response from Adyen
     lastResponse: {}, //Axios RAW response
@@ -194,8 +194,9 @@ Run ```npm build``` to build the module.
 
 ## Release History
 
-#### (2.0.8)
-- Added `authorize3dPayment` for handling 3D Secure authorization
+#### (2.0.9)
+- Update dependecies (Axios ^0.10)
+- Added `authorize3dPayment` for handling 3D Secure authorization (Thanks @grimor)
 
 #### (2.0.7)
 - Update dependencies
