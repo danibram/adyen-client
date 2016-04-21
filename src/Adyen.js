@@ -26,6 +26,11 @@ const Specs = {
         path: 'Payment/v12/authorise',
         fields: {}
     },
+    authorize3dPayment: {
+        method: 'authorize3dPayment',
+        path: 'Payment/v12/authorise3d',
+        fields: {}
+    },
     getRecurringData: {
         method: 'listRecurringDetails',
         path: 'Recurring/v12/listRecurringDetails',
@@ -73,6 +78,9 @@ export default class Adyen extends Client {
 
     authorizePayment (params) {
         return this._method(params, Specs.authorizePayment)
+    }
+    authorize3dPayment (params) {
+        return this._method(params, Specs.authorize3dPayment)
     }
     getRecurringData (params) {
         return this._method(params, Specs.getRecurringData)

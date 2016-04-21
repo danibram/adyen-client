@@ -89,6 +89,23 @@ Then you have the client initialized, now you have access to this methods, every
             console.log(data)
         })
     ```
+
+- ***authorize3dPayment***
+
+    ```javascript
+    aClient.authorize3dPayment({
+        "md": 'nOw6sWy2Kbu+bmg......'
+        "paResponse":"eNqtmFmTo7iygN/5FRU9......",
+        "browserInfo": {
+            "userAgent": "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36",
+            "acceptHeader": "application/json, text/plain, */*"
+        }
+    })
+        .then(function(data){
+            console.log(data)
+        })
+    ```
+
 - ***getRecurringData***
 
     ```javascript
@@ -176,6 +193,9 @@ Run ```npm install;npm run dev``` to watch the proyect, and compile the code aut
 Run ```npm build``` to build the module.
 
 ## Release History
+
+#### (2.0.8)
+- Added `authorize3dPayment` for handling 3D Secure authorization
 
 #### (2.0.7)
 - Update dependencies
