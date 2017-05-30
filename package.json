@@ -1,6 +1,6 @@
 {
   "name": "adyen-client",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "Adyen client for node.js integrations.",
   "main": "./lib",
   "scripts": {

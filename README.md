@@ -196,8 +196,8 @@ Run ```npm build``` to build the module.
 
 ## Release History
 
-#### (2.0.9)
-- Update dependecies (Axios ^0.10)
+#### (2.0.10)
+- Update dependecies (Axios ^0.16)
 - Added `authorize3dPayment` for handling 3D Secure authorization (Thanks @grimor)
 
 #### (2.0.7)
