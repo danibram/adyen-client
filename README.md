@@ -1,5 +1,7 @@
 # Adyen Client
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/danibram/adyen-client.svg)](https://greenkeeper.io/)
+
 [![Dependency Status](https://david-dm.org/danibram/adyen-client.svg)](https://david-dm.org/danibram/adyen-client)
 
 Adyen client

@@ -35,11 +35,11 @@
     "body-parser": "^1.15.0",
     "chai": "^3.5.0",
     "express": "^4.13.4",
-    "mocha": "^2.4.5",
+    "mocha": "^3.3.0",
     "source-map-support": "^0.4.0"
   },
   "dependencies": {
-    "axios": "^0.10.0",
+    "axios": "^0.16.1",
     "babel-polyfill": "^6.5.0",
     "moment": "^2.11.2"
   }
