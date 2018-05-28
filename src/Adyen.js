@@ -6,63 +6,80 @@
  * Licensed under the MIT license.
  */
 
-import Client from './Client'
-import moment from 'moment'
+import moment from `moment`;
+import Client from `./Client`;
 
 const Config = {
     production: {
-        endpoint: '',
+        endpoint: 'https://pal-live.adyen.com/pal/servlet/',
+        version: 'v12',
         production: true
     },
     development: {
         endpoint: 'https://pal-test.adyen.com/pal/servlet/',
+        version: 'v12',
         development: true
     }
 }
 
 const Specs = {
-    authorizePayment: {
-        method: 'authorizePayment',
-        path: 'Payment/v12/authorise',
-        fields: {}
+    authorizePayment: function (version) {
+        return {
+            method: 'authorizePayment',
+            path: `Payment/${version}/authorise`,
+            fields: {}
+        }
     },
-    authorize3dPayment: {
-        method: 'authorize3dPayment',
-        path: 'Payment/v12/authorise3d',
-        fields: {}
+    authorize3dPayment: function (version){
+        return {
+            method: 'authorize3dPayment',
+           path: `Payment/${version}/authorise3d`,
+            fields: {}
+        }
     },
-    getRecurringData: {
-        method: 'listRecurringDetails',
-        path: 'Recurring/v12/listRecurringDetails',
-        fields: {}
+    getRecurringData: function (version) {
+        return {
+            method: 'listRecurringDetails',
+            path: `Recurring/${version}/listRecurringDetails`,
+            fields: {}
+        }
     },
-    disableRecurring: {
-        method: 'disableRecurring',
-        path: 'Recurring/v12/disable',
-        fields: {}
+    disableRecurring: function (version) {
+        return {
+            method: 'disableRecurring',
+            path: `Recurring/${version}/disable`,
+            fields: {}
+        }
     },
-    capture: {
-        method: 'capture',
-        path: 'Payment/v12/capture',
-        fields: {}
-    },
-    refund: {
+    capture: function (version){
+        return {
+            method: 'capture',
+            path: `Payment/${version}/capture`,
+            fields: {}
+    }
+},
+    refund: function (version){
+
+    return {
         method: 'refund',
-        path: 'Payment/v12/refund',
-        fields: {}
-    },
-    cancelOrRefund: {
-        method: 'cancelOrRefund',
-        path: 'Payment/v12/cancelOrRefund',
+        path: `Payment/${version}/refund`,
         fields: {}
     }
+    },
+    cancelOrRefund: function (version){
+        return {
+            method: 'cancelOrRefund',
+            path: `Payment/${version}/cancelOrRefund`,
+            fields: {}
+    }
+}
 }
 
 export default class Adyen extends Client {
 
     constructor (config) {
 
-        let env = (config.development) ? 'development' : 'production'
+        let env = (config.development) ? `development` : `production`
         config = Object.assign(Config[env], config)
 
         super(config)
@@ -77,25 +94,25 @@ export default class Adyen extends Client {
     }
 
     authorizePayment (params) {
-        return this._method(params, Specs.authorizePayment)
+        return this._method(params, Specs.authorizePayment(this.config.version))
     }
     authorize3dPayment (params) {
-        return this._method(params, Specs.authorize3dPayment)
+        return this._method(params, Specs.authorize3dPayment(this.config.version))
     }
     getRecurringData (params) {
-        return this._method(params, Specs.getRecurringData)
+        return this._method(params, Specs.getRecurringData(this.config.version))
     }
     disableRecurring (params) {
-        return this._method(params, Specs.disableRecurring)
+        return this._method(params, Specs.disableRecurring(this.config.version))
     }
     capture (params) {
-        return this._method(params, Specs.capture)
+        return this._method(params, Specs.capture(this.config.version))
     }
     refund (params) {
-        return this._method(params, Specs.refund)
+        return this._method(params, Specs.refund(this.config.version))
     }
     cancelOrRefund (params) {
-        return this._method(params, Specs.cancelOrRefund)
+        return this._method(params, Specs.cancelOrRefund(this.config.version))
     }
 
     _method (params, cfg) {
@@ -120,7 +137,7 @@ export default class Adyen extends Client {
         })
 
         if (requiredRemainParams.length > 0) {
-            return new Error('You dont send all required params. [' + requiredRemainParams.toString() + ']')
+            return new Error(`You dont send all required params. [` + requiredRemainParams.toString() + `]`)
         }
 
         return params
