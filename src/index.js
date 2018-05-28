@@ -2,13 +2,13 @@
  * adyen-client
  *
  *
- * Copyright (c) 2015 Daniel Biedma Ramos
+ * Copyright (c) 2018 Daniel Biedma Ramos
  * Licensed under the MIT license.
  */
 
-import "babel-polyfill"
-import Adyen from './Adyen'
+import 'babel-polyfill';
+import Adyen from './Adyen';
 
-module.exports = function createTrustlyClient (config) {
-    return new Adyen (config)
+module.exports = function createTrustlyClient(config) {
+    return new Adyen(config);
 };

@@ -2,12 +2,12 @@
  * adyen-client
  *
  *
- * Copyright (c) 2015 Daniel Biedma Ramos
+ * Copyright (c) 2018 Daniel Biedma Ramos
  * Licensed under the MIT license.
  */
 
-import moment from `moment`;
-import Client from `./Client`;
+import moment from 'moment';
+import Client from './Client';
 
 const Config = {
     production: {
@@ -20,127 +20,130 @@ const Config = {
         version: 'v12',
         development: true
     }
-}
+};
 
 const Specs = {
-    authorizePayment: function (version) {
+    authorizePayment: function(version) {
         return {
             method: 'authorizePayment',
             path: `Payment/${version}/authorise`,
             fields: {}
-        }
+        };
     },
-    authorize3dPayment: function (version){
+    authorize3dPayment: function(version) {
         return {
             method: 'authorize3dPayment',
-           path: `Payment/${version}/authorise3d`,
+            path: `Payment/${version}/authorise3d`,
             fields: {}
-        }
+        };
     },
-    getRecurringData: function (version) {
+    getRecurringData: function(version) {
         return {
             method: 'listRecurringDetails',
             path: `Recurring/${version}/listRecurringDetails`,
             fields: {}
-        }
+        };
     },
-    disableRecurring: function (version) {
+    disableRecurring: function(version) {
         return {
             method: 'disableRecurring',
             path: `Recurring/${version}/disable`,
             fields: {}
-        }
+        };
     },
-    capture: function (version){
+    capture: function(version) {
         return {
             method: 'capture',
             path: `Payment/${version}/capture`,
             fields: {}
-    }
-},
-    refund: function (version){
-
-    return {
-        method: 'refund',
-        path: `Payment/${version}/refund`,
-        fields: {}
-    }
+        };
     },
-    cancelOrRefund: function (version){
+    refund: function(version) {
+        return {
+            method: 'refund',
+            path: `Payment/${version}/refund`,
+            fields: {}
+        };
+    },
+    cancelOrRefund: function(version) {
         return {
             method: 'cancelOrRefund',
             path: `Payment/${version}/cancelOrRefund`,
             fields: {}
+        };
     }
-}
-}
+};
 
 export default class Adyen extends Client {
+    constructor(config) {
+        let env = config.development ? `development` : `production`;
+        config = Object.assign(Config[env], config);
 
-    constructor (config) {
-
-        let env = (config.development) ? `development` : `production`
-        config = Object.assign(Config[env], config)
-
-        super(config)
-        this.config = config
+        super(config);
+        this.config = config;
     }
 
-    initCCForm () {
+    initCCForm() {
         return Promise.resolve({
-           "key": this.config.frontKey,
-           "generationTime": moment().toISOString()
-       })
+            key: this.config.frontKey,
+            generationTime: moment().toISOString()
+        });
     }
 
-    authorizePayment (params) {
-        return this._method(params, Specs.authorizePayment(this.config.version))
+    authorizePayment(params) {
+        return this._method(params, Specs.authorizePayment(this.config.version));
     }
-    authorize3dPayment (params) {
-        return this._method(params, Specs.authorize3dPayment(this.config.version))
+    authorize3dPayment(params) {
+        return this._method(params, Specs.authorize3dPayment(this.config.version));
     }
-    getRecurringData (params) {
-        return this._method(params, Specs.getRecurringData(this.config.version))
+    getRecurringData(params) {
+        return this._method(params, Specs.getRecurringData(this.config.version));
     }
-    disableRecurring (params) {
-        return this._method(params, Specs.disableRecurring(this.config.version))
+    disableRecurring(params) {
+        return this._method(params, Specs.disableRecurring(this.config.version));
     }
-    capture (params) {
-        return this._method(params, Specs.capture(this.config.version))
+    capture(params) {
+        return this._method(params, Specs.capture(this.config.version));
     }
-    refund (params) {
-        return this._method(params, Specs.refund(this.config.version))
+    refund(params) {
+        return this._method(params, Specs.refund(this.config.version));
     }
-    cancelOrRefund (params) {
-        return this._method(params, Specs.cancelOrRefund(this.config.version))
-    }
-
-    _method (params, cfg) {
-        let data = Object.assign({
-            merchantAccount: this.config.merchantAccount
-        }, params)
-
-        data = this._checkRequiredParams(data, cfg)
-        return this.makeRequest(data, cfg.path)
+    cancelOrRefund(params) {
+        return this._method(params, Specs.cancelOrRefund(this.config.version));
     }
 
-    _checkRequiredParams (params, cfg) {
+    _method(params, cfg) {
+        let data = Object.assign(
+            {
+                merchantAccount: this.config.merchantAccount
+            },
+            params
+        );
+
+        data = this._checkRequiredParams(data, cfg);
+        return this.makeRequest(data, cfg.path);
+    }
+
+    _checkRequiredParams(params, cfg) {
         var inputKeys = Object.keys(params);
 
-        var requiredRemainParams = Object.keys(cfg.fields).filter((key)=> {
-            var cfgField = cfg.fields[key]
+        var requiredRemainParams = Object.keys(cfg.fields).filter(key => {
+            var cfgField = cfg.fields[key];
 
             if (inputKeys.indexOf(key) < 0 && cfgField.required) {
-                return ky.field
+                return ky.field;
             }
-            return
-        })
+            return;
+        });
 
         if (requiredRemainParams.length > 0) {
-            return new Error(`You dont send all required params. [` + requiredRemainParams.toString() + `]`)
+            return new Error(
+                `You dont send all required params. [` +
+                    requiredRemainParams.toString() +
+                    `]`
+            );
         }
 
-        return params
+        return params;
     }
-
 }

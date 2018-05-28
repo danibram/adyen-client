@@ -1,6 +1,6 @@
 {
   "name": "adyen-client",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "Adyen client for node.js integrations.",
   "main": "./lib",
   "scripts": {
@@ -12,10 +12,7 @@
     "type": "git",
     "url": "https://github.com/danibram/adyen-client"
   },
-  "keywords": [
-    "adyen",
-    "client"
-  ],
+  "keywords": ["adyen", "client"],
   "author": {
     "name": "Daniel Biedma Ramos",
     "email": "info@danibram.es",
@@ -38,7 +35,7 @@
     "source-map-support": "^0.4.0"
   },
   "dependencies": {
-    "axios": "^0.16.1",
+    "axios": "^0.18.0",
     "babel-polyfill": "^6.5.0",
     "moment": "^2.11.2"
   }

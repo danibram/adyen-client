@@ -6,7 +6,6 @@
 
 Adyen client
 
-
 ## Getting started
 
 Install the module with: `npm install adyen-client`
@@ -18,8 +17,10 @@ var aClient = adyenClient({
     merchantAccount: 'YOUR MERCHANT ACCOUNT'
     username: 'YOUR USERNAME',
     password: 'YOUR PASSWORD',
+    version: 'v30', // by default is v12
     development: true
 });
+
 aClient
     .getRecurringData({
         "shopperReference": "SimonHopper1",
@@ -39,7 +40,7 @@ aClient
 First of all you need to initialize the client passing your merchant account, username, password and front end key (only if you need to do the frontend initialization).
 
 ```javascript
-var adyenClient = require('adyen-client')
+var adyenClient = require('adyen-client');
 
 /*
     opts = {
@@ -47,52 +48,55 @@ var adyenClient = require('adyen-client')
         merchantAccount: 'YOUR MERCHANT ACCOUNT'
         username: 'YOUR USERNAME',
         password: 'YOUR PASSWORD'
+        version: 'VERSION', // URL versions by default is v12
         development: Boolean //TRUE or FALSE indicates that your are on development, for production is not neccesary
     }
 
 */
 var aClient = adyenClient(opts);
 ```
+
 Then you have the client initialized, now you have access to this methods, every method return a promise, and you need to follow the adyen documentation to know how pass the data:
 
-- ***initCCForm***: Promise that returns the structure you need for the CSE encryption in frontend.
+*   **_initCCForm_**: Promise that returns the structure you need for the CSE encryption in frontend.
+
     ```javascript
-    aClient.initCCForm()
-        .then(function(data){
-            console.log(data)
-            /*
+    aClient.initCCForm().then(function(data) {
+        console.log(data);
+        /*
             {
                 "key": '10008|927D950...', // your Front-end key
                 "generationTime": '2016-01-01T00:00:00.000Z' // ISO date string
             }
              */
-        })
+    });
     ```
 
-- ***authorizePayment***
+*   **_authorizePayment_**
 
     ```javascript
-    aClient.authorizePayment({
-        "shopperEmail": "s.hopper@test.com",
-        "shopperReference": "SimonHopper1",
-        "recurring": {
-            "contract": "RECURRING"
-        },
-        "reference":"authorize-simonhopper1",
-        "amount": {
-            "value": "0",
-            "currency": "EUR"
-        },
-        "additionalData": {
-            "card.encrypted.json": "adyenjs_0_1_15$......"
-        }
-    })
-        .then(function(data){
-            console.log(data)
+    aClient
+        .authorizePayment({
+            shopperEmail: 's.hopper@test.com',
+            shopperReference: 'SimonHopper1',
+            recurring: {
+                contract: 'RECURRING'
+            },
+            reference: 'authorize-simonhopper1',
+            amount: {
+                value: '0',
+                currency: 'EUR'
+            },
+            additionalData: {
+                'card.encrypted.json': 'adyenjs_0_1_15$......'
+            }
         })
+        .then(function(data) {
+            console.log(data);
+        });
     ```
 
-- ***authorize3dPayment***
+*   **_authorize3dPayment_**
 
     ```javascript
     aClient.authorize3dPayment({
@@ -108,72 +112,77 @@ Then you have the client initialized, now you have access to this methods, every
         })
     ```
 
-- ***getRecurringData***
+*   **_getRecurringData_**
 
     ```javascript
-    aClient.getRecurringData({
-        'shopperReference': 'SimonHopper1',
-        'recurring': {
-            "contract": "RECURRING"
-        }
-    })
-        .then(function(data){
-            console.log(data)
+    aClient
+        .getRecurringData({
+            shopperReference: 'SimonHopper1',
+            recurring: {
+                contract: 'RECURRING'
+            }
         })
+        .then(function(data) {
+            console.log(data);
+        });
     ```
 
-- ***disableRecurring***
+*   **_disableRecurring_**
 
     ```javascript
-    aClient.disableRecurring({
-        "shopperReference": 'SimonHopper1',
-        "recurringDetailReference": 'CC TOKENIZED' //if you need to remove a specific one
-    })
-        .then(function(data){
-            console.log(data)
+    aClient
+        .disableRecurring({
+            shopperReference: 'SimonHopper1',
+            recurringDetailReference: 'CC TOKENIZED' //if you need to remove a specific one
         })
+        .then(function(data) {
+            console.log(data);
+        });
     ```
 
-- ***capture***
+*   **_capture_**
 
     ```javascript
-    aClient.capture({
-        "modificationAmount": {
-            "currency": 'EUR',
-            "value": '0'
-        },
-        "originalReference": 'YOUR AUTH REFERENCE',
-        "reference": "capture-" + data.transactionId
-    })
-        .then(function(data){
-            console.log(data)
+    aClient
+        .capture({
+            modificationAmount: {
+                currency: 'EUR',
+                value: '0'
+            },
+            originalReference: 'YOUR AUTH REFERENCE',
+            reference: 'capture-' + data.transactionId
         })
+        .then(function(data) {
+            console.log(data);
+        });
     ```
 
-- ***refund***
+*   **_refund_**
 
     ```javascript
-    aClient.refund( {
-        "modificationAmount": {
-            "currency": 'EUR',
-            "value": '0'
-        },
-        "originalReference": 'YOUR REFERENCE'
-    })
-        .then(function(data){
-            console.log(data)
+    aClient
+        .refund({
+            modificationAmount: {
+                currency: 'EUR',
+                value: '0'
+            },
+            originalReference: 'YOUR REFERENCE'
         })
+        .then(function(data) {
+            console.log(data);
+        });
     ```
 
-- ***cancelOrRefund***:
+*   **_cancelOrRefund_**:
 
     ```javascript
-    aClient.cancelOrRefund({
-        "originalReference": 'YOUR REFERENCE',
-    })
-        .then(function(data){
-            console.log(data)
+    aClient
+        .cancelOrRefund({
+            originalReference: 'YOUR REFERENCE'
         })
+        .then(function(data) {
+            console.log(data);
+        });
     ```
 
 ## Responses
@@ -191,32 +200,42 @@ The initCCForm returns the data example and the others returns this:
 
 ## Development
 
-Run ```npm install;npm run dev``` to watch the proyect, and compile the code automatically.
-Run ```npm build``` to build the module.
+Run `npm install;npm run dev` to watch the proyect, and compile the code automatically.
+Run `npm build` to build the module.
 
 ## Release History
 
+#### (2.0.11)
+
+*   Update dependecies (Axios ^0.18)
+*   Added posibility to pass the version in the contructor
+
 #### (2.0.10)
-- Update dependecies (Axios ^0.16)
-- Added `authorize3dPayment` for handling 3D Secure authorization (Thanks @grimor)
+
+*   Update dependecies (Axios ^0.16)
+*   Added `authorize3dPayment` for handling 3D Secure authorization (Thanks @grimor)
 
 #### (2.0.7)
-- Update dependencies
-- Added success field in response
-- Fix issues
-- Internal refractor (ES6)
-- Docs Changed
-- Responses now returns the RAW request, and response
+
+*   Update dependencies
+*   Added success field in response
+*   Fix issues
+*   Internal refractor (ES6)
+*   Docs Changed
+*   Responses now returns the RAW request, and response
 
 #### (1.0.8)
-- Internal Refactor
-- Added more methods
-- Better docs
+
+*   Internal Refactor
+*   Added more methods
+*   Better docs
 
 #### (1.0.7)
-- Fix dependencies
-- Firsts step.
-- Added basic methods
+
+*   Fix dependencies
+*   Firsts step.
+*   Added basic methods
 
 ## License
-Licensed under the MIT license. 2015
+
+Licensed under the MIT license. 2018
