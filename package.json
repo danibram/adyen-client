@@ -12,7 +12,10 @@
     "type": "git",
     "url": "https://github.com/danibram/adyen-client"
   },
-  "keywords": ["adyen", "client"],
+  "keywords": [
+    "adyen",
+    "client"
+  ],
   "author": {
     "name": "Daniel Biedma Ramos",
     "email": "info@danibram.es",
@@ -37,6 +40,6 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-polyfill": "^6.5.0",
-    "moment": "^2.11.2"
+    "moment": "^2.22.2"
   }
 }
