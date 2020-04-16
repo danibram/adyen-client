@@ -37,6 +37,13 @@ const Specs = {
             fields: {}
         };
     },
+    authorize3ds2Payment: function(version) {
+        return {
+            method: 'authorize3ds2Payment',
+            path: `Payment/${version}/authorise3ds2`,
+            fields: {}
+        };
+    },
     getRecurringData: function(version) {
         return {
             method: 'listRecurringDetails',
@@ -95,6 +102,9 @@ export default class Adyen extends Client {
     }
     authorize3dPayment(params) {
         return this._method(params, Specs.authorize3dPayment(this.config.version));
+    }
+    authorize3ds2Payment(params) {
+        return this._method(params, Specs.authorize3ds2Payment(this.config.version));
     }
     getRecurringData(params) {
         return this._method(params, Specs.getRecurringData(this.config.version));
