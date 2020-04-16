@@ -1,3 +1,5 @@
+## Warning: If you are looking for a modern solution you must use the oficial one -> https://github.com/Adyen/adyen-node-api-library
+
 # Adyen Client
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/danibram/adyen-client.svg)](https://greenkeeper.io/)
